@@ -1,4 +1,4 @@
-// generatedy by JSX compiler 0.9.84 (2014-04-10 06:13:57 +0900; 057c9c637289dda45a0575c50bd39e5fbe63e245)
+// generatedy by JSX compiler 0.9.86 (2014-04-12 21:06:45 +0900; 925b9f5a378447f64b9f0c7a75344ccb45b9e75c)
 var JSX = {};
 (function (JSX) {
 /**
@@ -198,11 +198,9 @@ function tar$_findCommand$S(cmd) {
 	var path2;
 	var path3;
 	var parentDir;
-	console.log('_findCommand');
 	dir = node$0.__dirname;
 	result = '';
 	while (true) {
-		console.log(dir);
 		path1 = path$0.join(dir, cmd);
 		if (fs$0.existsSync(path1)) {
 			result = path1;
@@ -267,12 +265,6 @@ function tar$extract$SSF$LError$IV$(sourceFile, destFolder, callback) {
 	tar = child_process$0.spawn(command, args);
 	tar.on('close', (function (code) {
 		callback(null, code | 0);
-	}));
-	tar.stdout.on('data', (function (data) {
-		console.log('stdout: ' + (data + ""));
-	}));
-	tar.stderr.on('data', (function (data) {
-		console.log('stdout: ' + (data + ""));
 	}));
 };
 

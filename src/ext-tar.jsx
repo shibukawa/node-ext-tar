@@ -68,12 +68,13 @@ __export__ class tar {
         tar.on('close', (code) -> {
             callback(null, code as int);
         });
+        /* Debug
         tar.stdout.on('data', (data) -> {
-          //console.log('stdout: ' + data as string);
+            console.log('stdout: ' + data as string);
         });
         tar.stderr.on('data', (data) -> {
-          //console.log('stdout: ' + data as string);
-        });
+            console.log('stdout: ' + data as string);
+        });*/
     }
 
     static function create(sourceFolder : string, destFile : string, callback : (Nullable.<Error>, int) -> void) : void {

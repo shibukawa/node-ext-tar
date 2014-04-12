@@ -1,6 +1,6 @@
 {
   "name": "ext-tar",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Fast tar extract module.",
   "scripts": {
     "build": "./node_modules/.bin/grunt build",
