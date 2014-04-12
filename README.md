@@ -11,7 +11,7 @@ Current Status
 
 * Now it provides only `extract` method.
 * It doesn't support fancy EventEmitter interface yet.
-* Windows is supported by [TarTool](http://tartool.codeplex.com/), but not tested.
+* Windows is supported by [TarTool](http://tartool.codeplex.com/).
 
 Code Example
 ---------------
@@ -24,7 +24,7 @@ import "ext-tar.jsx";
 class _Main {
     static function main(argv : string[]) : void
     {
-        ExtTar.extract('input.tar.gz', './output', (err, code) -> {
+        tar.extract('input.tar.gz', './output', (err, code) -> {
             console.log("finished : " + code as string);
         });
     }
@@ -34,9 +34,9 @@ class _Main {
 ### Use from node.js
 
 ```js
-var ExtTar = require('ext-tar').ExtTar;
+var tar = require('ext-tar').tar;
 
-ExtTar.extract('input.tar.gz', './output', function (err, code) {
+tar.extract('input.tar.gz', './output', function (err, code) {
     console.log("finished : " + code as string);
 });
 ```
@@ -54,10 +54,12 @@ If you want to use this library from other JSX project, install like the followi
 $ npm install ext-tar --save-dev
 ```
 
+It needs its 'bin' folder to run on Windows. If you use this module from JSX project, you should add this module to the `package.json` in top level modules. Runtime code can't find the command in deep folders.
+
 API Reference
 ------------------
 
-* ExtTar.extract(sourceFile : string, outputFolder : string, callback (Nullable.<Error>, int) -> void)
+* tar.extract(sourceFile : string, outputFolder : string, callback (Nullable.<Error>, int) -> void)
 
   Extract tar file. It detects extension automatically. It support `.tar`, `.tgz`, `.tar.gz`, `.tbz`, `.tar.bz2`.
 

@@ -23,7 +23,7 @@ module.exports = function(grunt) {
     jsx: {
       sample: {
         src: ['<%= sampleDir %>/*.jsx'],
-        add_search_path: ['<%= libDir %>', 'node_modules/*/src'],
+        add_search_path: ['<%= libDir %>'],
         dest: '<%= sampleDir %>/',
         executable: 'node'
       },
@@ -34,21 +34,21 @@ module.exports = function(grunt) {
             regexp: /src\/(.+)\.jsx/,
             replace: 'dest\/$1.js'
         },
-        add_search_path: ['<%= libDir %>', 'node_modules/*/src'],
-        minify: true,
+        add_search_path: ['<%= libDir %>'],
+        minify: false,
         release: true,
         linker: 'commonjs-lib'
       },
 
       test: {
         src: ['<%= testDir %>/*.jsx'],
-        add_search_path: ['<%= libDir %>', 'node_modules/*/src'],
+        add_search_path: ['<%= libDir %>'],
         test: true
       },
 
       doc: {
         src: ['<%= libDir %>/*.jsx'],
-        add_search_path: ['<%= libDir %>', 'node_modules/*/src'],
+        add_search_path: ['<%= libDir %>'],
         dest: '<%= docDir %>',
         mode: 'doc'
       }
