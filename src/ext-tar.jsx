@@ -50,31 +50,17 @@ __export__ class tar {
             var args = [sourceFile, destFolder];
         } else {
             var command = 'tar';
-            var ext = path.extname(sourceFile);
-            switch (ext) {
-            case '.tar':
-            case '.tgz':
-            case '.gz':
-            case '.tbz':
-            case '.bz2':
-            case '.xz':
-                var args = ['-xvf', sourceFile, '-C', destFolder];
-                break;
-            default:
-                return callback(new Error('Unknown extension `' + ext + '`'), -1);
-            }
+            var args = ['-xvf', sourceFile, '-C', destFolder];
         }
         var tar = child_process.spawn(command, args);
         tar.on('close', (code) -> {
-            callback(null, code as int);
+            var codeInt = code as int;
+            if (codeInt == 0) {
+                callback(null, 0);
+            } else {
+                callback(new Error("ext-tar: command '" + command + "' fails by code " + codeInt as string + "."), codeInt);
+            }
         });
-        /* Debug
-        tar.stdout.on('data', (data) -> {
-            console.log('stdout: ' + data as string);
-        });
-        tar.stderr.on('data', (data) -> {
-            console.log('stdout: ' + data as string);
-        });*/
     }
 
     static function create(sourceFolder : string, destFile : string, callback : (Nullable.<Error>, int) -> void) : void {

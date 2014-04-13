@@ -231,7 +231,6 @@ function tar$extract$SSF$LError$IV$(sourceFile, destFolder, callback) {
 	var stat;
 	var command;
 	var args;
-	var ext;
 	var tar;
 	if (! fs$0.existsSync(sourceFile)) {
 		return callback(new Error('sourceFile `' + sourceFile + '` doesn\'t exist.'), -1);
@@ -248,23 +247,17 @@ function tar$extract$SSF$LError$IV$(sourceFile, destFolder, callback) {
 		args = [ sourceFile, destFolder ];
 	} else {
 		command = 'tar';
-		ext = path$0.extname(sourceFile);
-		switch (ext) {
-		case '.tar':
-		case '.tgz':
-		case '.gz':
-		case '.tbz':
-		case '.bz2':
-		case '.xz':
-			args = [ '-xvf', sourceFile, '-C', destFolder ];
-			break;
-		default:
-			return callback(new Error('Unknown extension `' + ext + '`'), -1);
-		}
+		args = [ '-xvf', sourceFile, '-C', destFolder ];
 	}
 	tar = child_process$0.spawn(command, args);
 	tar.on('close', (function (code) {
-		callback(null, code | 0);
+		var codeInt;
+		codeInt = code | 0;
+		if (codeInt === 0) {
+			callback(null, 0);
+		} else {
+			callback(new Error("ext-tar: command '" + command + "' fails by code " + (codeInt + "") + "."), (codeInt | 0));
+		}
 	}));
 };
 
